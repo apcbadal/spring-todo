@@ -1,6 +1,8 @@
 package com.example.ToDoApplication.controller;
 
+import com.example.ToDoApplication.Service.ProductService;
 import com.example.ToDoApplication.Service.ProjectService;
+import com.example.ToDoApplication.dto.ProductCategoryDTO;
 import com.example.ToDoApplication.dto.ProjectDto;
 import com.example.ToDoApplication.exception.BadRequestException;
 import com.example.ToDoApplication.model.AuthProvider;
@@ -49,6 +51,8 @@ public class AuthController {
     ProjectService projectService;
 
     @Autowired
+    ProductService productService;
+    @Autowired
     Gson gson;
 
     @PostMapping("/login")
@@ -91,6 +95,21 @@ public class AuthController {
         return ResponseEntity.created(location)
                 .body(new ApiResponse(true, "User registered successfully@"));
     }
+
+    @ResponseBody
+    @PostMapping("/addProducts")
+    public ResponseEntity<?>addProducts(@Valid @RequestBody ProductCategoryDTO productCategoryDTO){
+        productService.save(productCategoryDTO);
+        String msg ="Data saved successfully.";
+        Gson gson = new Gson();
+        String jsonMsg = gson.toJson(msg);
+        return new ResponseEntity<>(jsonMsg,new HttpHeaders(),HttpStatus.OK);
+    }
+
+    @ResponseBody
+    @GetMapping("/getProducts")
+    public  List<ProductCategoryDTO>getAllProduct()
+    {return productService.findAll();}
 
     @ResponseBody
     @PostMapping("/addTodo")

@@ -8,7 +8,7 @@ import java.util.List;
 public class ProjectDto {
     private Long uniqueId;
     private String title;
-    private LocalDate createdDate;
+    private LocalDate  createdDate;
     private List<TodoDto> todolists;
 
     public Long getUniqueId() {

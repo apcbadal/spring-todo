@@ -11,12 +11,15 @@ public class Project {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "unique_id")
     private Long uniqueId;
+
     @Basic
     @Column(name = "title")
     private String title;
+
     @Basic
     @Column(name = "created_date")
     private LocalDate createdDate;
+
     @OneToMany(mappedBy = "project",fetch = FetchType.EAGER,cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Todo> todolists;
 
