@@ -3,11 +3,10 @@ package com.example.ToDoApplication.controller;
 import com.example.ToDoApplication.Service.ProductService;
 import com.example.ToDoApplication.Service.ProjectService;
 import com.example.ToDoApplication.dto.ProductCategoryDTO;
+import com.example.ToDoApplication.dto.ProductDTO;
 import com.example.ToDoApplication.dto.ProjectDto;
 import com.example.ToDoApplication.exception.BadRequestException;
-import com.example.ToDoApplication.model.AuthProvider;
-import com.example.ToDoApplication.model.Project;
-import com.example.ToDoApplication.model.User;
+import com.example.ToDoApplication.model.*;
 import com.example.ToDoApplication.payload.ApiResponse;
 import com.example.ToDoApplication.payload.AuthResponse;
 import com.example.ToDoApplication.payload.LoginRequest;
@@ -109,7 +108,14 @@ public class AuthController {
     @ResponseBody
     @GetMapping("/getProducts")
     public  List<ProductCategoryDTO>getAllProduct()
-    {return productService.findAll();}
+    {
+        List<ProductCategoryDTO> productCategoryDTOS=productService.findAll();
+        /*for(int i =0;i<=productCategoryDTOS.size();i++){
+            List<ProductDTO> productDTOS=productService.findProductByCategoryId(productCategoryDTOS.get(i).getUniqueId());
+                   productCategoryDTOS.get(i).setProductList(productDTOS);
+        }*/
+        return productCategoryDTOS;
+    }
 
     @ResponseBody
     @PostMapping("/addTodo")
@@ -127,4 +133,11 @@ public class AuthController {
         return projectService.findAllProject();
     }
 
+    @ResponseBody
+    @PostMapping("/getProdDetails")
+    public List<Product>viewProduct(@RequestBody ProductDTO productDTO){
+        List<Product> products=productService.findProductById(productDTO.getUniqueId());
+        return products;
+
+    }
 }

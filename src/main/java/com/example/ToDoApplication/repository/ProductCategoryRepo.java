@@ -9,6 +9,6 @@ import java.util.List;
 
 @Repository
 public interface ProductCategoryRepo extends JpaRepository<ProductCategory,Long> {
-@Query(value = "select * from ProductCategory",nativeQuery = true)
+@Query(value = "select * from product left outer  join product_category pc on product.product_category = pc.unique_id order by product.created_at limit 3\n",nativeQuery = true)
     List<ProductCategory> findLatestProducts();
 }

@@ -1,16 +1,27 @@
 package com.example.ToDoApplication.dto;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 import java.sql.Timestamp;
 
 public class ProductDTO {
+    @JsonDeserialize
     private Long uniqueId;
     private String productName;
     private Long productQty;
     private Double productPrice;
     private Timestamp createdAt;
     private Timestamp updatedAt;
+    @JsonDeserialize
+    private String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public Long getUniqueId() {
         return uniqueId;

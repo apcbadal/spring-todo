@@ -1,8 +1,5 @@
 package com.example.ToDoApplication.dto;
 
-import com.example.ToDoApplication.model.Product;
-
-import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
 
